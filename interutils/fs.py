@@ -1,11 +1,9 @@
-
-from re import match
 from subprocess import call, check_output, DEVNULL, CalledProcessError
 from os import listdir
 from pathlib import Path
 from typing import Optional
 
-from termcolor import colored, cprint
+from .interactive import pr, choose, cyan
 
 
 def choose_file(root_dir: Path) -> Optional[Path]:
@@ -31,7 +29,7 @@ def choose_file(root_dir: Path) -> Optional[Path]:
 
 def count_lines(file_path: Path) -> int:
     # TODO Crossplatformize
-    return int(check_output(('/usr/bin/wc', '-l', str(file_path.resolve()))).decode().split(' ')[0])
+    return 1 + int(check_output(('/usr/bin/wc', '-l', str(file_path.resolve()))).decode().split(' ')[0])
 
 
 def human_bytes(size_in_bytes: int) -> str:
@@ -43,6 +41,12 @@ def human_bytes(size_in_bytes: int) -> str:
 
 
 def file_volume(path: Path) -> tuple:
+    """
+    Returns:
+        [0] => Size in bytes
+        [1] => Lines count
+        [2] => A colored string that includes a human-readable representation of both values 
+    """
     sb = path.stat().st_size
     lc = count_lines(path)
     return sb, lc, f'{cyan(path.name)} ({human_bytes(sb)}, {lc})'
