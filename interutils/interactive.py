@@ -5,7 +5,7 @@ def clear() -> None:
     print(chr(27) + "[2J")
 
 
-def pr(text: str, notation: str = '+', end='\n') -> None:
+def pr(text: str, notation='+', end='\n') -> None:
     col = {
         '+': 'green',
         '*': 'cyan',
