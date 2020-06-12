@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="interutils",
-    version="0.8.0",
+    version="0.8.2",
     author="Max G",
     author_email="max3227@gmail.com",
     description="A collection of handy utilities and snippets for creating interactive programs.",
