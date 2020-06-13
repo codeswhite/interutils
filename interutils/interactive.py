@@ -2,10 +2,25 @@ from termcolor import colored, cprint
 
 
 def clear() -> None:
+    """
+    Clear the screen by sending an escape sequence
+    """
     print(chr(27) + "[2J")
 
 
+def cyan(text: str) -> str:
+    """
+    Color a string in cyan
+    """
+    return colored(text, 'cyan')
+
+
 def pr(text: str, notation='+', end='\n') -> None:
+    """
+    Fancy print function
+    Adds a colored bracket-wrapped sign in front of the text
+    * Default sign is '+'
+    """
     col = {
         '+': 'green',
         '*': 'cyan',
@@ -18,6 +33,14 @@ def pr(text: str, notation='+', end='\n') -> None:
 
 
 def choose(options: iter = ('Yes', 'No'), prompt: str = 'Choose action:', default: int = 0) -> int:
+    """
+    Presents a list of options to the user,
+        allowing him to numerically select a desired one.
+
+    * Returns: The selected item's index
+    * Returns: -2 => KeyboardInterrupt caught
+    * Returns: -1 => Bad input received
+    """
     if not options:
         raise ValueError(
             " [!] No options passed to choice() !!!")  # No options
@@ -45,12 +68,13 @@ def choose(options: iter = ('Yes', 'No'), prompt: str = 'Choose action:', defaul
         return -1  # Probably text received
 
 
-def ask(question: str) -> (None, str):
+def ask(question: str) -> (None, str, int):
     """
-    Ask the user something
-    :param question:
-    :return: the response, None if no response
-    ** Expect a KeyboardInterrupt!!
+    Ask the user something by giving him a question
+
+    * Returns: The response as int if possible
+        otherwise as str, None if no response
+    * Expect: KeyboardInterrupt
     """
     pr(question, '?')
     answer = input('>')
@@ -63,7 +87,13 @@ def ask(question: str) -> (None, str):
     return answer
 
 
-def pause(reason: str = 'continue', cancel: bool = False):
+def pause(reason: str = 'continue', cancel: bool = False) -> bool:
+    """
+    Show a message and wait for an enter key to be pressed
+
+    Returns: True after [ENTER] pressed
+    Returns: False after [^C] pressed
+    """
     s = 'Press %s to %s' % (colored('[ENTER]', 'cyan'), reason)
     if cancel:
         s += ', %s to cancel' % colored('[^C]', 'red')
@@ -76,16 +106,13 @@ def pause(reason: str = 'continue', cancel: bool = False):
         return False
 
 
-def cyan(text: str) -> str:
-    return colored(text, 'cyan')
-
-
 def banner(txt: str, style: str = 'slant') -> str:
     """
-    Depends on: "pyfiglet"
-    :param txt: The text to return as an ASCII art
-    :param style: The style (From: /usr/lib/python3.6/site-packages/pyfiglet/fonts/)
-    :return: The created ASCII art
+    A static wrapper around pyfiglet that allows easy creation of figlets
+
+    Requires: "pyfiglet"
+    Param: style: The style (From: /usr/lib/python*/site-packages/pyfiglet/fonts/)
+    Returns: The created ASCII art
     """
     try:
         from pyfiglet import Figlet
@@ -98,7 +125,7 @@ def banner(txt: str, style: str = 'slant') -> str:
 
 def get_date() -> str:
     """
-    :return: today's date (e.g. "28.11.2017" ;P)
+    Returns: Today's date (e.g. "28.11.2017" ;P)
     """
     from datetime import datetime
     return datetime.now().strftime("%d.%m.%Y")
