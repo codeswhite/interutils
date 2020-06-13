@@ -7,7 +7,16 @@ from interutils.fs import choose_file, count_lines, file_volume, human_bytes, is
 
 
 class TestFS(unittest.TestCase):
-    mockfile = pathlib.Path('tests/mockfile')
+    def setUp(self):
+        import random
+        import string
+        self.mockfile = pathlib.Path(
+            'mockfile' + random.choice(string.digits) * 10)
+        self.mockfile.write_text('a\nb\nc', encoding='utf-8')
+
+    def tearDown(self):
+        import os
+        os.remove(self.mockfile)
 
     def test_count_lines(self):
         self.assertEqual(count_lines(self.mockfile), 3)
