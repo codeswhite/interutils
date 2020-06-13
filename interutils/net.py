@@ -36,23 +36,3 @@ def get_net() -> (None, dict):
         d.update({ls[2]: {'interface': ls[2], 'subnet': ls[0], 'ip': ls[8]}})
 
     return d
-
-
-def ping(ip: str, count: int = 1, timeout: int = 1) -> bool:
-    """
-    Depends on: "iputils"
-    A binding for system call ping
-    :param ip: Destination
-    :param count: How much ping requests to send
-    :param timeout: How long wait for a reply
-    :return: A boolean that represents success of the ping
-    """
-    if count < 1:
-        raise ValueError('Count cannot be lower than 1')
-    try:
-        return call(['ping', '-c', str(count), '-w', str(timeout), ip], stdout=DEVNULL, stderr=DEVNULL) == 0
-    except CalledProcessError:
-        pass
-    except KeyboardInterrupt:
-        pr('[utils] Ping interrupted!', '!')
-    return False
