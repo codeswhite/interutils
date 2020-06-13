@@ -2,7 +2,7 @@
 from re import match
 from subprocess import call, check_output, DEVNULL, CalledProcessError
 
-from interutils.interactive import pr
+from .interactive import pr
 
 
 def is_mac(mac: str) -> bool:
