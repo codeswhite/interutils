@@ -12,6 +12,7 @@ def choose_file(root_dir: Path) -> Optional[Path]:
         if f.is_dir():
             return entry
         return f'{entry}\t({human_bytes(f.stat().st_size)}, {count_lines(f)})'
+
     listing = listdir(root_dir)
     if not listing:
         return pr('Empty directory!', '!')
