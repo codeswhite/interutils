@@ -1,0 +1,39 @@
+name: Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache pipenv files
+      uses: actions/cache@v1
+      env:
+        cache_name: cache-pipenv-files
+      with:
+        path: ~/.pipenv_cache
+        key: ${{ runner.os }}-${{ env.cache-name }}-${{ matrix.python-version }}
+    - name: Update
+      run: sudo apt update
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install packages
+      run: sudo apt install -y python3-pip python3-setuptools
+    - name: Install pipenv
+      run: sudo pip3 install pipenv
+    - name: Install dependecies
+      run: pipenv --python ${{ matrix.python-version }} install -d --pypi-mirror https://pypi.org/simple/ -r ./requirements.txt
+      env:
+        PIP_CACHE_DIR: ~/.pipenv_cache
+    - name: Run tests
+      run: pipenv run python -m unittest discover ./tests
