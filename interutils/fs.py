@@ -29,8 +29,7 @@ def choose_file(root_dir: Path) -> Optional[Path]:
 
 
 def count_lines(file_path: Path) -> int:
-    # TODO Crossplatformize
-    return 1 + int(check_output(('/usr/bin/wc', '-l', str(file_path.resolve()))).decode().split(' ')[0])
+    return 1 + file_path.read_bytes().count(b'\n')
 
 
 def human_bytes(size_in_bytes: int) -> str:
