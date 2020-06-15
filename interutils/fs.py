@@ -7,6 +7,9 @@ from .interactive import pr, choose, cyan
 
 
 def choose_file(root_dir: Path) -> Optional[Path]:
+    """
+    Interactive loop to choose a file
+    """
     def _format(root_dir: Path, entry: str) -> str:
         f = root_dir / entry
         if f.is_dir():
@@ -29,10 +32,12 @@ def choose_file(root_dir: Path) -> Optional[Path]:
 
 
 def count_lines(file_path: Path) -> int:
+    """ Return count of line endings in a given file """
     return 1 + file_path.read_bytes().count(b'\n')
 
 
 def human_bytes(size_in_bytes: int) -> str:
+    """ Return a human-readable size representation """
     unit = 0
     while size_in_bytes >= 1024:
         unit += 1
@@ -73,7 +78,7 @@ def is_image(image_path: str) -> (str, None):
     return None
 
 
-def is_package(package_name) -> (str, None):
+def is_package(package_name: str) -> (str, None):
     """
     Check if a system package is installed
 
@@ -86,7 +91,7 @@ def is_package(package_name) -> (str, None):
         return False
     except FileNotFoundError:
         try:
-            return check_output(('apt', 'list', '-qq', package_name)).decode().split(' ')[1]
+            return check_output(('apt', 'list', '-qq', package_name)).decode().strip().split(' ')[1]
         except CalledProcessError:
             pass
     return None
