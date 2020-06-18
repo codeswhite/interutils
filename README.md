@@ -1,5 +1,5 @@
-A collection of handy utilities and snippets for creating interactive programs.
+## A collection of utilities for creating interactive console scripts
 
-TODO
-+ add 'check_dependencies' function & check all over
+#### TODO
+- add 'check_dependencies' function & check all over
        the WD for possible implementations

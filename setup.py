@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.10.2",
     author="Max G",
     author_email="max3227@gmail.com",
-    description="A collection of handy utilities and snippets for creating interactive programs.",
+    description="A collection of utilities for creating interactive console scripts",
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
