@@ -78,6 +78,17 @@ def is_image(image_path: str) -> (str, None):
     return None
 
 
+def check_dependencies(package_names: iter) -> (None, list):
+    """
+    Check each one of the system packages if its installed
+    """
+    res = []
+    for package in package_names:
+        if is_package(package) is None:
+            res.append(package)
+    return res if res else None
+
+
 def is_package(package_name: str) -> (str, None):
     """
     Check if a system package is installed by accessing the available package manager
