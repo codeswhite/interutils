@@ -80,7 +80,7 @@ def is_image(image_path: str) -> (str, None):
 
 def is_package(package_name: str) -> (str, None):
     """
-    Check if a system package is installed
+    Check if a system package is installed by accessing the available package manager
 
     :param package_name: Package to check
     :return: The version of the installed package or None if no such package
@@ -88,10 +88,10 @@ def is_package(package_name: str) -> (str, None):
     try:
         return check_output(['/usr/bin/pacman', '-Q', package_name], stderr=DEVNULL).decode().strip().split(' ')[1]
     except CalledProcessError:
-        return False
+        return  # No such package
     except FileNotFoundError:
         try:
             return check_output(('apt', 'list', '-qq', package_name)).decode().strip().split(' ')[1]
         except CalledProcessError:
             pass
-    return None
+    return

@@ -3,6 +3,7 @@ import pathlib
 
 from interutils import *
 
+
 class TestFS(unittest.TestCase):
     def setUp(self):
         import random
@@ -28,6 +29,10 @@ class TestFS(unittest.TestCase):
             self.assertEqual(human_bytes(1024**i), '1' +
                              ('', 'KB', 'MB', 'GB', 'TB')[i])
 
+    def test_is_package(self):
+        self.assertIsNone(is_package(
+            'rundom-unexisting-packagename-64198938249071658123'))
+        # TODO find a way to actuall check
     # TODO
     # def test_is_image(self):
     #     pass
