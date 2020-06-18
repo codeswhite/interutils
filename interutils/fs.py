@@ -82,11 +82,10 @@ def check_dependencies(package_names: iter) -> (None, list):
     """
     Check each one of the system packages if its installed
     """
-    res = []
-    for package in package_names:
-        if is_package(package) is None:
-            res.append(package)
-    return res if res else None
+    if not package_names:
+        raise ValueError('"package_names" should not be empty')
+
+    return {package: is_package(package) for package in package_names}
 
 
 def is_package(package_name: str) -> (str, None):
