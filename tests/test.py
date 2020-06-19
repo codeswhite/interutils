@@ -32,16 +32,12 @@ class TestFS(unittest.TestCase):
     def test_is_package(self):
         self.assertIsNone(is_package(
             'rundom-unexisting-packagename-64198938249071658123'))
-        # TODO find a way to actuall check
-    # TODO
-    # def test_is_image(self):
-    #     pass
-
 
 # TODO
 # class TestNet(unittest.TestCase):
 #     def test_get_net(self):
 #         pass
+
 
 if __name__ == '__main__':
     unittest.main()

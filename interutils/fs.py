@@ -102,7 +102,7 @@ def is_package(package_name: str) -> (str, None):
         return  # No such package
     except FileNotFoundError:
         try:
-            return check_output(('apt', 'list', '-qq', package_name)).decode().strip().split(' ')[1]
-        except CalledProcessError:
+            return check_output(('apt', 'list', '-qq', package_name)).split()[1].decode()
+        except IndexError:
             pass
     return
