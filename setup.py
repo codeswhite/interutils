@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="interutils",
-    version="0.10.2",
+    version="0.11.1",
     author="Max G",
     author_email="max3227@gmail.com",
     description="A collection of utilities for creating interactive console scripts",
