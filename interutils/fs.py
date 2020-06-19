@@ -39,6 +39,7 @@ def count_lines(file_path: Path) -> int:
 def human_bytes(size_in_bytes: int) -> str:
     """ Return a human-readable size representation """
     unit = 0
+    size_in_bytes = int(size_in_bytes)
     while size_in_bytes >= 1024:
         unit += 1
         size_in_bytes /= 1024
