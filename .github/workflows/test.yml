@@ -32,7 +32,7 @@ jobs:
     - name: Install pipenv
       run: sudo pip3 install pipenv
     - name: Install dependecies
-      run: pipenv --python ${{ matrix.python-version }} install -d --pypi-mirror https://pypi.org/simple/ -r ./requirements.txt
+      run: pipenv --python ${{ matrix.python-version }} install -d --pypi-mirror https://pypi.org/simple/ .
       env:
         PIP_CACHE_DIR: ~/.pipenv_cache
     - name: Run tests
