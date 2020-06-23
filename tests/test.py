@@ -11,12 +11,17 @@ class TestFS(unittest.TestCase):
         self.mockfile = pathlib.Path(
             'mockfile' + random.choice(string.digits) * 10)
         self.mockfile.write_text('a\nb\nc', encoding='utf-8')
+        self.emptyfile = pathlib.Path(
+            'emptyfile' + random.choice(string.digits) * 10)
+        self.emptyfile.touch()
 
     def tearDown(self):
         import os
         os.remove(self.mockfile)
+        os.remove(self.emptyfile)
 
     def test_count_lines(self):
+        self.assertEqual(count_lines(self.emptyfile), 0)
         self.assertEqual(count_lines(self.mockfile), 3)
 
     def test_file_volume(self):

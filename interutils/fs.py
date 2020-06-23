@@ -33,7 +33,10 @@ def choose_file(root_dir: Path) -> Optional[Path]:
 
 def count_lines(file_path: Path) -> int:
     """ Return count of line endings in a given file """
-    return 1 + file_path.read_bytes().count(b'\n')
+    lc = file_path.read_bytes().count(b'\n')
+    if lc:
+        lc += 1
+    return lc
 
 
 def human_bytes(size_in_bytes: int) -> str:
