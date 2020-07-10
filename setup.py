@@ -5,12 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="interutils",
-    version="0.12.3",
+    version="0.12.4",
     author="Max G",
     author_email="max3227@gmail.com",
     description="A collection of utilities for creating interactive console scripts",
     long_description=long_description,
     long_description_content_type="text/markdown",
+    url="https://github.com/codeswhite/interutils",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
