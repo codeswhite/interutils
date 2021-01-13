@@ -1,17 +1,17 @@
 import json
 import typing
-from pathlib import PosixPath
+from pathlib import Path
 from .interactive import pr
 
 
 class DictConfig(dict):
-    def __init__(self, conf_path: PosixPath,
+    def __init__(self, conf_path: (Path, str),
                  default_config: dict,
                  quiet: bool = False,
                  save_indent: int = 4):
 
         super(DictConfig, self).__init__()
-        self.conf_path = conf_path
+        self.conf_path = Path(conf_path)
         self.save_indent = save_indent
 
         if data := self.load():
