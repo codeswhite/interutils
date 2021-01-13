@@ -6,9 +6,13 @@ from .interactive import pr
 
 class DictConfig(dict):
     def __init__(self, conf_path: PosixPath,
-                 default_config: dict, quiet=False):
+                 default_config: dict,
+                 quiet: bool = False,
+                 save_indent: int = 4):
+
         super(DictConfig, self).__init__()
         self.conf_path = conf_path
+        self.save_indent = save_indent
 
         if data := self.load():
             self.update(data)
@@ -29,4 +33,4 @@ class DictConfig(dict):
 
     def save(self) -> None:
         with self.conf_path.open('w') as f:
-            json.dump(self, f)
+            json.dump(self, f, indent=self.save_indent)
