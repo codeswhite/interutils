@@ -20,7 +20,7 @@ def choose_file(root_dir: Path) -> Optional[Path]:
     if not listing:
         return pr('Empty directory!', '!')
     while 1:
-        c = choose([_format(root_dir, i) for i in listing], default=-1)
+        c = choose([_format(root_dir, i) for i in listing], prompt='Choose a file:', default=-1)
         if c < 0:
             return
         f = root_dir / listing[c]
